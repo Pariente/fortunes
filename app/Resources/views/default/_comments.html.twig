@@ -1,0 +1,30 @@
+<div class="post-comment">
+  <h2>Commentaires</h2>
+</div>
+<div class="comments">
+  {% if story.comments|length == 0 %}
+    Cette quote n'a pas encore de commentaire. Sois le premier. Sois le plus fort. Sois le meilleur dresseur. Et prends Salamèche, bordel. Respecte-toi.
+  {% else %}
+    {% for comment in story.comments %}
+      <div class="comment-header">
+        <span class="comment-author">
+          <a href="{{ path('byauthor', {author:comment.author}) }}">{{ comment.author }}</a>
+        </span>
+        <span class="comment-date">{{ comment.createdAt|date("m/d/Y H:i") }}</span>
+      </div>
+      <div class="comment-content">
+        {{ comment.content |nl2br }}
+      </div>
+      <span class="comment-vote">
+        Votez : <a href="{{ path('voteup/comment', {id:comment.id}) }}">(+) {{ comment.upVote }}</a>
+        <a href="{{ path('votedown/comment', {id:comment.id}) }}">(-) {{ comment.downVote }}</a>
+      </span>
+    {% endfor %}
+  {% endif %}
+</div>
+<div class="post-comment">
+  <h2>Troll-machine</h2>
+</div>
+<form action="" method="POST" novalidate>
+  {{ form_widget(form) }}
+</form>

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Fortunes :: Les + - bien
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+  <div id="container">
+    <div id="status">
+      <div class="section-title">
+        Le genre de quotes que ton daron doit kiffer.
+      </div>
+
+      {% for story in stories %}
+        {{ include("default/_fortune.html.twig") }}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

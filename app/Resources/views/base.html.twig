@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Fortune{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="container">
+        <div id="welcome">
+          <h1><a href="/">Fortunes</a></h1>
+          <h2>Le meilleur de DTC, avec Symfony.</h2>
+        </div>
+        <nav id="nav">
+          {% if app.request.get('_route') == 'last' %}
+            <a href="{{ path('last') }}" class="current">LES + NEW</a>
+          {% else %}
+            <a href="{{ path('last') }}">LES + NEW</a>
+          {% endif %}
+          {% if app.request.get('_route') == 'best' %}
+            <a href="{{ path('best') }}" class="current">LES + BIEN</a>
+          {% else %}
+            <a href="{{ path('best') }}">LES + BIEN</a>
+          {% endif %}
+          {% if app.request.get('_route') == 'worst' %}
+            <a href="{{ path('worst') }}" class="current">LES + - BIEN</a>
+          {% else %}
+            <a href="{{ path('worst') }}">LES + - BIEN</a>
+          {% endif %}
+          {% if app.request.get('_route') == 'random' %}
+            <a href="{{ path('random') }}" class="current">LA + RANDOM</a>
+          {% else %}
+            <a href="{{ path('random') }}">LA + RANDOM</a>
+          {% endif %}
+          <a href="{{ path('create') }}" class="nav-publish">PUBLIER</a>
+        </nav>
+      </div>
+    </div>
+      {% block body %}{% endblock %}
+      {% block javascripts %}{% endblock %}
+  </body>
+</html>

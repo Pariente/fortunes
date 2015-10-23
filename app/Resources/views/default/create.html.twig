@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Publier une quote
+{% endblock %}
+
+{% block body %}
+  <div id="wrapper">
+    <div id="container">
+      <div id="status">
+          <div class="section-title">
+            Bonus si tu parles de chaton.
+          </div>
+          <form action="{{ path('create') }}" method="POST" novalidate>
+            {{ form_widget(form) }}
+          </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

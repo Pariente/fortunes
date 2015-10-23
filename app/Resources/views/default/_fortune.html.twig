@@ -1,0 +1,22 @@
+<div class="story-box">
+  <div class="story-header">
+    <small>#{{ story.id }}</small>
+    <a href="{{ path('story', {id:story.id}) }}">{{ story.title }}</a><span class="story-author">,
+      par <a href="{{ path('byauthor', {author:story.author}) }}">{{ story.author }}</a></span>
+    <span class="story-date">{{ story.createdAt|date("m/d/Y H:i") }}</span>
+  </div>
+  <div class="story-content">
+    {{ story.content |nl2br }}
+  </div>
+  <span class="story-vote">
+    Votez : <a href="{{ path('voteup/story', {id:story.id}) }}">(+) {{ story.upVote }}</a>
+    <a href="{{ path('votedown/story', {id:story.id}) }}">(-) {{ story.downVote }}</a>
+    <a href="{{ path('story', {id:story.id}) }}" class="comment-nb">
+      {% if story.comments|length > 1 %}
+        {{ story.comments|length }} commentaires
+      {% else %}
+        {{ story.comments|length }} commentaire
+      {% endif %}
+    </a>
+  </span>
+</div>

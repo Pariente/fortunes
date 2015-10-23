@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Fortunes #{{ story.id }} {{ story.title }}
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+  <div id="container">
+    <div id="status">
+      <div class="section-title">
+        #{{ story.id }} {{ story.title }}
+      </div>
+      {{ include("default/_fortune.html.twig") }}
+      {{ include("default/_comments.html.twig") }}
+    </div>
+  </div>
+</div>
+{% endblock %}

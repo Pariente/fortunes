@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Fortunes :: Les + new
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+  <div id="container">
+    <div id="status">
+      <div class="section-title">
+        Michael Bay présente :
+      </div>
+      {{ pagerfanta(stories) }}
+
+      {% for story in stories %}
+        {{ include("default/_fortune.html.twig") }}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

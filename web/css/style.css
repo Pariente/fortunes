@@ -1,0 +1,251 @@
+body { background: #fff; font: 18px/1.5 Avenir, sans-serif; }
+h1, h2 { line-height: 1.2; margin: 0 }
+h1 { font-size: 36px; margin: 0 0 .5em;}
+h2 { font-size: 21px; }
+p { margin: 0 0 1em 0; }
+a {
+  text-decoration: none;
+  color: green;
+  display: inline
+}
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+#nav {
+  background-color: #256F5C;
+  display: table;
+  font-size: 0.9em;
+  margin-bottom: 1em;
+  width: 100%
+}
+
+#nav a {
+  border-right: 1px solid #fff;
+  color: white;
+  display: table-cell;
+  padding: 0.5em 0em;
+  text-align: center;
+  text-decoration: none;
+  width: 20%
+}
+
+#nav a.current {
+  background-color: #00382A
+}
+
+#nav a: {
+  background-color: #333
+}
+
+#nav a:hover {
+  color:white
+}
+
+#nav a.nav-publish {
+  border-left: 4px solid #fff;
+  background-color: #A03548;
+}
+
+#status nav {
+  display: table;
+}
+#status nav>span,
+#status nav>a {
+  display: table-cell;
+  padding: 0.5em 0em;
+  text-align: center;
+  text-decoration: none;
+  width: 20%
+}
+
+.disabled {
+  display: none; !important
+}
+
+#wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
+#container { padding: 0em }
+#welcome, #status { margin-bottom: 2em; }
+#welcome h1 span { display: block; font-size: 75%; }
+#icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
+#icon-book { display: none; }
+
+.section-title {
+  color: #256F5C;
+  display: block;
+  font-size: 1.7em;
+  padding: 0em;
+  margin-bottom: 0.5em;
+}
+.section-title::before {
+  content: "|"
+}
+.story-box {
+  margin-bottom: 1em;
+  width: 100%
+}
+.story-header {
+  color: darkgreen;
+  border-bottom: 1px solid #333;
+  width: 100%
+}
+.story-author {
+  color: #000;
+  font-style: italic;
+  font-size: smaller
+}
+.story-date,
+.comment-date {
+  color: #000;
+  float: right;
+  padding-right: 1em;
+  font-size: smaller
+}
+.story-content {
+  margin: 1em 1em 0.5em 1em
+}
+.comment-nb {
+  float: right;
+}
+.post-comment {
+  margin-bottom: 0.5em
+}
+.post-comment h2 {
+  color: #256F5C;
+  font-weight: lighter
+}
+.comments {
+  border-left: 1px solid #256F5C;
+  background-color: #eee;
+  margin-left: 1em;
+  padding-left: 1em;
+  margin-bottom: 1em;
+}
+.comment-content {
+  padding-left: 0.5em
+}
+.comment-vote {
+  font-size: smaller
+}
+.comment-title {
+  width: 100%;
+  text-align: center;
+  color: #256F5C;
+  font-size: 21px;
+  font-weight: lighter;
+}
+
+/*** FORMS ***/
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
+
+input::-ms-placeholder, textarea::-ms-placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
+
+header {
+  position: relative;
+  margin: 100px 0 25px 0;
+  font-size: 2.3em;
+  text-align: center;
+  letter-spacing: 7px;
+}
+
+#Fortune,
+#Comment {
+  position: relative;
+  width: 70%;
+  margin: 10px auto;
+  font-size: 1.1em;
+}
+
+input {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875em;
+  width: 100%;
+  height: 50px;
+  padding: 0px 15px 0px 15px;
+
+  background: transparent;
+  outline: none;
+  color: #726659;
+
+  border: solid 1px #b3aca7;
+  margin-bottom: 0.5em;
+
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 470px;
+  height: 110px;
+  max-height: 110px;
+  padding: 15px;
+
+  background: transparent;
+  outline: none;
+
+  color: #726659;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875em;
+
+  border: solid 1px #b3aca7;
+
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+}
+
+#Fortune_submit,
+#Comment_submit {
+  height: 52px;
+  width: 100%;
+  padding: 0.5em;
+  margin: 5px 0px 0px 0px;
+
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875em;
+  color: #fff;
+  background-color: #256F5C;
+
+  outline:none;
+  cursor: pointer;
+
+  border: solid 1px #b3aca7;
+  border-top: none;
+}
+
+@media (min-width: 768px) {
+    #wrapper { width: 80%; margin: 2em auto; }
+    #icon-book { display: inline-block; }
+    #Fortune,
+    #Comment {
+      width: 50%
+    }
+
+    @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+    .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+}

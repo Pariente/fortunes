@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Fortunes FTW
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+  <div id="container">
+    <div id="status">
+      <div class="section-title">
+        Les dernières quotes.
+      </div>
+
+      {% for story in stories %}
+        {{ include("default/_fortune.html.twig") }}
+      {% endfor %}
+
+      {{ render(controller("AppBundle:Default:showBestRated", { "nb":3 })) }}
+
+    </div>
+  </div>
+</div>
+{% endblock %}
