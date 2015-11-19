@@ -1,0 +1,12 @@
+<div class="story-box">
+  <div class="story-header">
+    <small>#{{ story.id }}</small>
+    <a href="{{ path('story', {id:story.id}) }}">{{ story.title }}</a><span class="story-author">,
+      par <a href="{{ path('byauthor', {author:story.author}) }}">{{ story.author }}</a></span>
+    <span class="story-date">{{ story.createdAt|date("m/d/Y H:i") }}</span>
+  </div>
+  <div class="story-content">
+    {{ story.content |nl2br }}
+  </div>
+  <a href="{{ path('moderate/delete', {id:story.id}) }}">Brûlez tout.</a>
+</div>

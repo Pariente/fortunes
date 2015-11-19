@@ -13,15 +13,21 @@ a:hover {
   text-decoration: underline;
 }
 
+#welcome h2 { float: left }
+#welcome h5 { float: right; margin: 0.5em 1em 0em 0em }
+
 #nav {
-  background-color: #256F5C;
   display: table;
   font-size: 0.9em;
+  margin-top: 3em;
   margin-bottom: 1em;
   width: 100%
 }
 
 #nav a {
+  box-sizing: border-box;
+  float: left;
+  background-color: #256F5C;
   border-right: 1px solid #fff;
   color: white;
   display: table-cell;
@@ -48,6 +54,11 @@ a:hover {
   background-color: #A03548;
 }
 
+/*#nav a.nav-moderation {
+  float: right;
+  margin-top: 0.3em
+}*/
+
 #status nav {
   display: table;
 }
@@ -66,7 +77,7 @@ a:hover {
 
 #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
 #container { padding: 0em }
-#welcome, #status { margin-bottom: 2em; }
+#status { margin-bottom: 2em; }
 #welcome h1 span { display: block; font-size: 75%; }
 #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
 #icon-book { display: none; }
@@ -167,7 +178,8 @@ header {
 }
 
 #Fortune,
-#Comment {
+#Comment,
+#Moderated {
   position: relative;
   width: 70%;
   margin: 10px auto;
@@ -219,7 +231,8 @@ textarea {
 }
 
 #Fortune_submit,
-#Comment_submit {
+#Comment_submit,
+#Moderated_submit {
   height: 52px;
   width: 100%;
   padding: 0.5em;
@@ -241,7 +254,8 @@ textarea {
     #wrapper { width: 80%; margin: 2em auto; }
     #icon-book { display: inline-block; }
     #Fortune,
-    #Comment {
+    #Comment,
+    #Moderated {
       width: 50%
     }
 

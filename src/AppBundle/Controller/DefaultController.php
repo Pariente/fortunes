@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Fortune;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Moderated;
 use AppBundle\Form\FortuneType;
 use AppBundle\Form\CommentType;
 use Pagerfanta\Pagerfanta;
@@ -114,7 +115,7 @@ class DefaultController extends Controller
     public function createAction(Request $request)
     {
       // Create a form
-      $form = $this->createForm(new FortuneType, new Fortune);
+      $form = $this->createForm(new FortuneType, new Moderated);
 
       $form->handleRequest($request);
 
@@ -128,6 +129,47 @@ class DefaultController extends Controller
 
       return $this->render('default/create.html.twig', ["form" => $form->createView()]);
     }
+
+    /**
+     * @Route("/moderate", name="moderate")
+     */
+    public function moderateAction(Request $request)
+    {
+      // Display quotes to be moderated
+      $pagerfanta = new Pagerfanta($this->getDoctrine()->getRepository("AppBundle:Moderated")->findLast());
+      $pagerfanta
+      ->setMaxPerPage(10)
+      ->setCurrentPage($request->get("page", 1));
+      return $this->render('default/moderate.html.twig', ["stories" => $pagerfanta] );
+    }
+
+    /**
+     * @Route("/moderate/delete/{id}", name="moderate/delete")
+     */
+
+     public function deleteModerated($id)
+     {
+       $em = $this->getDoctrine()->getManager();
+       $moderated = $em->getRepository("AppBundle:Moderated")->find($id);
+       $em->remove($moderated);
+       $em->flush();
+
+       return $this->redirect($this->getRequest()->headers->get('referer'));
+     }
+
+     /**
+      * @Route("/moderate/validate/{id}", name="moderate/validate")
+      */
+
+      public function validateModerated($id)
+      {
+        $em = $this->getDoctrine()->getManager();
+        $moderated = $em->getRepository("AppBundle:Moderated")->find($id);
+        $em->remove($moderated);
+        $em->flush();
+
+        return $this->redirect($this->getRequest()->headers->get('referer'));
+      }
 
     /**
      * @Route("/voteup/story/{id}", name="voteup/story")
