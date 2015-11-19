@@ -20,9 +20,10 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
       // Display all the stories
+      $session = $this->get('session')->all();
       $pagerfanta = new Pagerfanta($this->getDoctrine()->getRepository("AppBundle:Fortune")->findLast());
       $pagerfanta->setMaxPerPage(3);
-      return $this->render('default/index.html.twig', ["stories" => $pagerfanta] );
+      return $this->render('default/index.html.twig', ["stories" => $pagerfanta, "session" => $session] );
     }
 
     /**
@@ -31,11 +32,12 @@ class DefaultController extends Controller
     public function lastAction(Request $request)
     {
       // Display all the stories
+      $session = $this->get('session')->all();
       $pagerfanta = new Pagerfanta($this->getDoctrine()->getRepository("AppBundle:Fortune")->findLast());
       $pagerfanta
       ->setMaxPerPage(10)
       ->setCurrentPage($request->get("page", 1));
-      return $this->render('default/last.html.twig', ["stories" => $pagerfanta] );
+      return $this->render('default/last.html.twig', ["stories" => $pagerfanta, "session" => $session] );
     }
 
     /**
@@ -44,7 +46,10 @@ class DefaultController extends Controller
     public function bestAction(Request $request)
     {
       // Display all the stories
-      return $this->render('default/best.html.twig', ["stories" => $this->getDoctrine()->getRepository("AppBundle:Fortune")->findBest(10, "DESC")] );
+      $session = $this->get('session')->all();
+      return $this->render('default/best.html.twig',
+      ["stories" => $this->getDoctrine()->getRepository("AppBundle:Fortune")->findBest(10, "DESC"),
+      "session" => $session] );
     }
 
     /**
@@ -53,7 +58,10 @@ class DefaultController extends Controller
     public function worstAction(Request $request)
     {
       // Display all the stories
-      return $this->render('default/worst.html.twig', ["stories" => $this->getDoctrine()->getRepository("AppBundle:Fortune")->findBest(10, "ASC")] );
+      $session = $this->get('session')->all();
+      return $this->render('default/worst.html.twig',
+      ["stories" => $this->getDoctrine()->getRepository("AppBundle:Fortune")->findBest(10, "ASC"),
+      "session" => $session] );
     }
 
     /**
@@ -68,7 +76,10 @@ class DefaultController extends Controller
     public function showBestRatedAction($nb)
     {
       // Display the last N stories
-      return $this->render('default/showBestRated.html.twig', ["stories" => $this->getDoctrine()->getRepository("AppBundle:Fortune")->findBest($nb, "DESC")]);
+      $session = $this->get('session')->all();
+      return $this->render('default/showBestRated.html.twig',
+      ["stories" => $this->getDoctrine()->getRepository("AppBundle:Fortune")->findBest($nb, "DESC"),
+      "session" => $session]);
     }
 
     /**
@@ -77,9 +88,11 @@ class DefaultController extends Controller
     public function showByAuthorAction($author)
     {
       // Display the stories of the author
+      $session = $this->get('session')->all();
       return $this->render('default/showByAuthor.html.twig', [
           "stories" => $this->getDoctrine()->getRepository("AppBundle:Fortune")->findByAuthor($author),
-          "author" => $author
+          "author" => $author,
+          "session" => $session
         ]);
     }
 
@@ -93,6 +106,7 @@ class DefaultController extends Controller
       $form = $this->createForm(new CommentType, new Comment);
 
       $form->handleRequest($request);
+      $session = $this->get('session')->all();
 
       if ($form->isValid()) {
         $em = $this->getDoctrine()->getManager();
@@ -105,6 +119,7 @@ class DefaultController extends Controller
       }
       return $this->render('default/showStory.html.twig', [
         "story" => $fortune,
+        "session" => $session,
         "form" => $form->createView()
         ]);
     }
@@ -219,7 +234,7 @@ class DefaultController extends Controller
        $fortune = $this->getDoctrine()->getRepository("AppBundle:Fortune")->find($id);
 
        if (!$this->get('session')->has("hasVotedFor".$id)) {
-         $this->get('session')->set("hasVotedFor".$id, "value");
+         $this->get('session')->set("hasVotedFor".$id, true);
          $fortune->voteUp();
          $this->getDoctrine()->getManager()->flush();
        }
@@ -235,8 +250,8 @@ class DefaultController extends Controller
       {
         $fortune = $this->getDoctrine()->getRepository("AppBundle:Fortune")->find($id);
 
-        if (!$this->get('session')->has("hasVotedFor".$id)) {
-          $this->get('session')->set("hasVotedFor".$id, "value");
+        if (!$this->get('session')->has("hasVotedAgainst".$id)) {
+          $this->get('session')->set("hasVotedAgainst".$id, true);
           $fortune->voteDown();
           $this->getDoctrine()->getManager()->flush();
         }

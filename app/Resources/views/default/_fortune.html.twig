@@ -9,8 +9,17 @@
     {{ story.content |nl2br }}
   </div>
   <span class="story-vote">
-    Votez : <a href="{{ path('voteup/story', {id:story.id}) }}">(+) {{ story.upVote }}</a>
-    <a href="{{ path('votedown/story', {id:story.id}) }}">(-) {{ story.downVote }}</a>
+    Votez :
+    {% if attribute(session, 'hasVotedFor' ~ story.id) is defined %}
+      <strong><a href="{{ path('voteup/story', {id:story.id}) }}">(+) {{ story.upVote }}</a></strong>
+    {% else %}
+      <a href="{{ path('voteup/story', {id:story.id}) }}">(+) {{ story.upVote }}</a>
+    {% endif %}
+    {% if attribute(session, 'hasVotedAgainst' ~ story.id) is defined %}
+      <strong><a href="{{ path('votedown/story', {id:story.id}) }}">(-) {{ story.downVote }}</a></strong>
+    {% else %}
+      <a href="{{ path('votedown/story', {id:story.id}) }}">(-) {{ story.downVote }}</a>
+    {% endif %}
     <a href="{{ path('story', {id:story.id}) }}" class="comment-nb">
       {% if story.comments|length > 1 %}
         {{ story.comments|length }} commentaires
