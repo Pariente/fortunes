@@ -18,5 +18,6 @@
         {{ story.comments|length }} commentaire
       {% endif %}
     </a>
+    <br>Editez : <a href="{{ path('edit', {id:story.id}) }}">Je corrige.</a>
   </span>
 </div>

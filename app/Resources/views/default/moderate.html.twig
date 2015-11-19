@@ -11,9 +11,13 @@
           <div class="section-title">
             Un anneau pour les modérer tous.
           </div>
-          {% for story in stories %}
-            {{ include("default/_moderated.html.twig") }}
-          {% endfor %}
+          {% if stories|length == 0 %}
+            Il n'y a aucune quote &agrave; mod&eacute;rer. Tu peux retourner peigner des poneys ou envahir la Pologne. C'est au choix.
+          {% else %}
+            {% for story in stories %}
+              {{ include("default/_moderated.html.twig") }}
+            {% endfor %}
+          {% endif %}
       </div>
     </div>
   </div>

@@ -147,7 +147,7 @@ class DefaultController extends Controller
      * @Route("/moderate/delete/{id}", name="moderate/delete")
      */
 
-     public function deleteModerated($id)
+     public function deleteModeratedAction($id)
      {
        $em = $this->getDoctrine()->getManager();
        $moderated = $em->getRepository("AppBundle:Moderated")->find($id);
@@ -161,15 +161,54 @@ class DefaultController extends Controller
       * @Route("/moderate/validate/{id}", name="moderate/validate")
       */
 
-      public function validateModerated($id)
+      public function validateModeratedAction($id)
       {
         $em = $this->getDoctrine()->getManager();
+
         $moderated = $em->getRepository("AppBundle:Moderated")->find($id);
+
+        $newFortune = new Fortune();
+        $newFortune->setTitle($moderated->getTitle());
+        $newFortune->setAuthor($moderated->getAuthor());
+        $newFortune->setCreatedAt($moderated->getCreatedAt());
+        $newFortune->setContent($moderated->getContent());
+
+        $em->persist($newFortune);
         $em->remove($moderated);
         $em->flush();
 
-        return $this->redirect($this->getRequest()->headers->get('referer'));
+        return $this->redirectToRoute('moderate');
       }
+
+      /**
+       * @Route("/edit/{id}", name="edit")
+       */
+
+       public function editFortuneAction($id, Request $request)
+       {
+         $em = $this->getDoctrine()->getManager();
+
+         $fortune = $em->getRepository("AppBundle:Fortune")->find($id);
+
+         // Create a form
+         $form = $this->createForm(new FortuneType, $fortune);
+
+         $form->handleRequest($request);
+
+         if ($form->isValid()) {
+           $editedFortune = $form->getData();
+           $fortune->setTitle($editedFortune->getTitle());
+           $fortune->setAuthor($editedFortune->getAuthor());
+           $fortune->setContent($editedFortune->getContent());
+           $em->flush();
+
+           return $this->redirectToRoute('homepage');
+         }
+
+         return $this->render('default/edit.html.twig',
+         ["form" => $form->createView(),
+         "stories" => $fortune]);
+       }
 
     /**
      * @Route("/voteup/story/{id}", name="voteup/story")

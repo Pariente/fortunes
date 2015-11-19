@@ -10,7 +10,7 @@ class FortuneType extends AbstractType
 
   public function getName()
   {
-    return "Moderated";
+    return "Fortune";
   }
 
   public function buildForm(FormBuilderInterface $builder, array $options)

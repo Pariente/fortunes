@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Editer une quote
+{% endblock %}
+
+{% block body %}
+  <div id="wrapper">
+    <div id="container">
+      <div id="status">
+          <div class="section-title">
+            Tu peux tout changer.
+          </div>
+          <form action="{{ path('edit', {id: stories.id}) }}" method="POST" novalidate>
+            {{ form_widget(form) }}
+          </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
